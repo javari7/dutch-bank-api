@@ -1,0 +1,59 @@
+20250515	15:26:48	ec431c68-467d-4d73-8c98-192e705a8173	Error: Not allowed by CORS
+20250515	15:28:40	8ba713f7-156b-45b2-a216-e389fafd0b6f	Error: Not allowed by CORS
+20250515	15:29:51	042c57c9-07b1-45b1-9281-cc69e5f13c1c	Error: Not allowed by CORS
+20250515	15:30:42	17c92ecb-70ee-4add-80d7-b1293948d821	Error: Not allowed by CORS
+20250515	15:32:31	22b2ae09-718c-4542-8e78-cdb0f5affbfa	Error: Not allowed by CORS
+20250515	15:32:34	eaf1c047-0019-48bb-89cc-1998f4a1fbe4	Error: Not allowed by CORS
+20250515	15:35:14	f47f83c0-5f56-4813-82dc-574e9d65d6ba	Error: Not allowed by CORS
+20250515	15:38:46	20408af3-b85e-47f8-8b81-a1679dc7bb1a	Error: Not allowed by CORS
+20250515	15:40:06	b6bf452a-d257-4799-8ddc-65dc65f4a798	SyntaxError: Unexpected token '-', "------WebK"... is not valid JSON
+20250515	15:51:29	15d54027-22bc-49b1-a156-e9c8651910d7	Error: Not allowed by CORS
+20250515	15:57:16	95b70ebd-8363-4cd6-971e-fd242abfc9c7	Error: Not allowed by CORS
+20250515	15:58:58	e1ef581a-0ca5-4db7-aeb7-0c9b7e0ccefe	Error: Not allowed by CORS
+20250515	16:09:13	c8163497-e9d3-4eba-8b8a-2b4788cefe2a	Error: Not allowed by CORS
+20250515	16:09:15	c6861b91-7539-4b18-9abf-bd2e3db387cb	Error: Not allowed by CORS
+20250515	16:09:20	bfb897b4-674d-4a7e-9c1e-2b648afa3f3b	Error: Not allowed by CORS
+20250515	16:11:42	6edb5460-65d2-4a52-b709-c22e8b79dff9	Error: Not allowed by CORS
+20250515	16:17:25	e67c3337-123c-4931-bd16-a717196b2635	Error: Not allowed by CORS
+20250515	16:19:14	72219b31-0444-452b-aa9f-40c77f5c805f	Error: Not allowed by CORS
+20250515	16:22:49	90d1871e-fc67-4b4f-bbb1-012bffc1efca	Error: Not allowed by CORS
+20250515	16:25:29	43c797b5-ae75-4b69-9cba-218d93f1e25a	Error: Not allowed by CORS
+20250515	17:05:46	e5fd3ba2-575a-4368-8c41-c074b5312d68	Error: Not allowed by CORS
+20250515	17:13:16	43fd675c-b3fa-403c-aed3-896771ceb3e2	Error: Not allowed by CORS
+20250515	17:15:27	a86e8abd-e8e3-4ae6-83ad-ce4dcdeb0504	Error: Not allowed by CORS
+20250515	17:18:12	cea117f2-eb08-4c30-8ce9-db3bf5439bdc	Error: Not allowed by CORS
+20250515	17:23:33	4841bee7-5dd8-430d-8c02-5a6700c07e37	Error: Not allowed by CORS
+20250515	17:23:33	19d61c2e-fbfb-41c4-8950-90dd98308aef	Error: Not allowed by CORS
+20250515	17:23:33	b1a8ecdf-e000-4a08-ab00-86c583ccd463	Error: Not allowed by CORS
+20250515	17:24:17	f3d603c9-aced-4062-b6f8-be73e3f5c8a7	Error: Not allowed by CORS
+20250515	17:24:59	0b68f635-666d-4e92-ae47-16001840d3ee	Error: Not allowed by CORS
+20250515	17:26:41	f9742edd-0bec-4168-9e3d-25735b7d0344	Error: Not allowed by CORS
+20250515	17:27:54	09c40b11-3376-4a79-92e3-8cca69388217	Error: Not allowed by CORS
+20250515	17:40:48	482e5311-0979-4ec1-8d70-205831276025	Error: Not allowed by CORS
+20250515	17:47:16	4f95c954-4c3e-4b10-83f7-63178fefb20a	Error: Not allowed by CORS
+20250515	17:54:57	8766cb28-72bd-4a2d-a01c-c8b967466534	Error: Not allowed by CORS
+20250515	17:59:17	485c6c7e-3a58-47e7-8641-757873c5a978	Error: Not allowed by CORS
+20250517	10:44:46	c3888a10-33a5-4b3d-afd4-f542ae2f8136	Error: Not allowed by CORS
+20250517	10:51:20	8564b169-2579-4931-812e-3b3b802cbca2	Error: Not allowed by CORS
+20250517	10:54:01	9a804f8e-c388-4cb1-ba03-5b5ee0bf725c	Error: Not allowed by CORS
+20250517	10:57:50	4980e0ac-e64f-4902-b8d1-834aad2ca406	Error: Not allowed by CORS
+20250517	11:02:02	1193112b-3739-4bab-98a5-47cd97f9ea6b	Error: Not allowed by CORS but this is shit
+20250517	22:10:30	94d32eeb-6db4-48d3-8961-946699160e3c	Error: Not allowed by CORS
+20250517	22:51:09	71f25c86-d959-420a-a3c9-38b18ec4af65	Error: Not allowed by CORS
+20250517	23:08:54	c3a17db4-290f-44c8-988d-43e04c81fc84	Error: Not allowed by CORS
+20250517	23:22:26	2a27d7fe-bfad-4b3c-8db9-13c8ee3deacb	Error: Not allowed by CORS
+20250519	13:57:49	73bb3fc7-2279-43a9-aca7-cd4fafdbb882	Error: Not allowed by CORS
+20250519	14:01:17	bffb2cc4-718f-4a93-ac1b-9485dc1125ec	Error: Not allowed by CORS
+20250519	14:11:35	b9f959a9-ca7e-4f8b-befb-5f8c50f1aeed	Error: Not allowed by CORS
+20250519	14:16:52	19648af3-b213-4011-ade7-edae9b251b9d	Error: Not allowed by CORS
+20250519	14:22:40	a36ad772-1923-4ead-8c95-1dc5d587fb03	Error: Not allowed by CORS
+20250519	14:44:21	af9695ab-9509-4219-a4c9-75cd482a4cc3	Error: Not allowed by CORS
+20250528	15:26:58	6c4dce51-deb0-4bfd-bda4-234790743781	Error: Not allowed by CORS
+20250528	15:26:58	67e5ef8c-6530-48cf-90f8-2c8d65fedd36	Error: Not allowed by CORS
+20250703	04:06:41	3d026f1c-06eb-46c0-bd5d-d799fbc11dd3	TypeError: Cannot read properties of undefined (reading 'emailId')
+20250703	04:08:52	37d7f5e2-d342-4574-a9b7-8eb36962824e	TypeError: Cannot set properties of undefined (setting 'emailId')
+20250703	04:09:54	22d70860-6730-439b-a659-3b8ade366f1a	TypeError: Cannot set properties of undefined (setting 'emailId')
+20250703	04:12:32	e3329fc3-90d9-46d7-abbc-01a660188193	TypeError: Cannot set properties of undefined (setting '_id')
+20250719	15:01:38	34ef95a7-c45c-4964-a65b-14dcf39d8fb5	TypeError: req.user.roles.map is not a function
+20250719	15:11:07	ff0fe90e-8384-4c1c-bb9b-370205aacb6b	TypeError: req.user.roles.map is not a function
+20250721	17:40:26	89da9e5f-9b42-4950-96b8-c6999a82fe42	JsonWebTokenError: jwt malformed
