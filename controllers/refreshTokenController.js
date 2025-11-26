@@ -45,11 +45,13 @@ const handleRefreshToken = async (req, res) => {
             // Refresh token was still valid
             const roles = Object.values(foundUser.roles);
             const accessToken = jwt.sign(
-                {
+               {
+               "UserInfo": {
                 "_id":foundUser._id,
                 "emailId": foundUser.emailId,
                 "roles": roles
-            },
+            }
+        },
                 process.env.ACCESS_TOKEN_SECRET,
                 { expiresIn: '1h' }
             );
@@ -67,9 +69,9 @@ const handleRefreshToken = async (req, res) => {
             const result = await foundUser.save();
 
             // Creates Secure Cookie with refresh token
-            res.cookie('jwt', newRefreshToken, { httpOnly: true,  sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+            res.cookie('jwt', newRefreshToken, { httpOnly: true,secure: true,  sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
-            res.json({ accessToken })
+            res.json({roles, accessToken })
         }
     );
 

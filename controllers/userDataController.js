@@ -16,15 +16,15 @@ const add = async (req, res) => {
 
   if (!userD) {
       // Create account if it doesn't exist
-  const userD = new UserDetails({
-        usersdetail: req._id,
-        balance: balance,
-      });
-
-        await userD.save();
+  // const userD = new UserDetails({
+  //       usersdetail: req._id,
+  //       balance: balance,
+  //     });
+  //       await userD.save();
+   throw new Error("no user")
     } else {
 
-      userD.balance += +balance; // Add amount to existing balance
+      userD.usersdetail.balance += +balance; // Add amount to existing balance
       await userD.save();
     }
 
@@ -60,13 +60,11 @@ const subtract = async (req, res) => {
 }
 
 
-
-
 const getUser = async (req, res) => {
     try{
     const userD = await UserDetails.findOne({ 'usersdetail' : req._id})
     .select('-_id -id')
-    .populate('usersdetail',"firstname emailId").select('-__v')
+    .populate('usersdetail',"firstname emailId lastname country balance").select('-__v')
     .select('-_id -id').exec();
 
   if(!userD){
@@ -78,7 +76,6 @@ const getUser = async (req, res) => {
         res.status(400).json(error.message)
     }
 }
-
 
 
 module.exports = {

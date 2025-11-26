@@ -3,9 +3,6 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 
-
-
-
 const employeeSchema = new Schema({
     firstname: {
         type: String,
@@ -104,7 +101,7 @@ const employeeSchema = new Schema({
         Admin: Number
     },
      refreshToken: [String],
-    balance:String
+    balance:Number
 }, { id: false },{
     toJSON: {virtuals: true},
     toObject: {virtuals: true}
@@ -118,7 +115,7 @@ const employeeSchema = new Schema({
 
 
 employeeSchema.pre('save', function(next) {
-    this.balance = '$0';
+    this.balance = 0;
     next();
 })
 

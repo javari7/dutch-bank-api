@@ -27,6 +27,14 @@ const handleNewUser = async (req, res) => {
             confirmpassword:hashedConfirmedPwd
         
         });
+
+
+       // const userD = new UserDetails({
+  //       usersdetail: req._id,
+  //       balance: balance,
+  //     });
+  //       await userD.save();
+
       
         res.status(201).json({ 'success': `New user ${result.emailId} created!` });
         // res.status(201).json(result);

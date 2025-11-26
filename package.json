@@ -1,5 +1,5 @@
 {
-  "name": "bank app",
+  "name": "bankapp",
   "version": "1.0.0",
   "description": "banking app simulation",
   "main": "server.js",
