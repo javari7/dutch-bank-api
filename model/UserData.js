@@ -3,14 +3,13 @@ const Schema = mongoose.Schema;
 // const User = require('./User');
 
 
-const userSchema = new Schema({
+const apiSchema = new Schema({
   usersdetail:{ 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'Userdetail' 
+    ref: 'User' 
 },
   balance:{
   type:Number,
-   default:"0",
   },
   status:{
     type:String,
@@ -30,7 +29,7 @@ const userSchema = new Schema({
 
 
 
-userSchema.virtual('Name').get(function() {
+apiSchema.virtual('Name').get(function() {
   return this.usersdetail.firstname + ' ' + this.usersdetail.lastname;
 });
 
@@ -41,10 +40,10 @@ userSchema.virtual('Name').get(function() {
 
 
 
-const UserDetails =  mongoose.model('User', userSchema);
+const UserApi =  mongoose.model('UserApi', apiSchema);
 
 
-module.exports = UserDetails 
+module.exports = UserApi
 
 
 

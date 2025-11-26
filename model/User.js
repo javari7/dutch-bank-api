@@ -1,9 +1,13 @@
 // const { isThisHour } = require('date-fns/esm');
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const validator = require('validator');
+const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 
 
-const employeeSchema = new Schema({
+
+const userSchema = new Schema({
     firstname: {
         type: String,
        required: [true, 'First name is required field!']
@@ -48,10 +52,12 @@ const employeeSchema = new Schema({
         type: Number,
         required:  [true, 'Phone number is a required field!']
     },
-    emailId: {
+    email: {
         type: String,
         required:  [true, 'Email is a required field!'],
-        unique:true
+        unique:true,
+        lowercase:true,
+        validator :[validator.isEmail, 'Please enter a valid email']
     },
     occupation: {
         type: String,
@@ -75,19 +81,27 @@ const employeeSchema = new Schema({
     },
     pin: {
         type: Number,
-        required:  [true, 'Pin is required field!']
+        // required:  [true, 'Pin is required field!']
     },
     password: {
         type: String,
         required:  [true, 'Password is required field!'],
+        minlength:8
+       
     },
     confirmpassword: {
         type: String,
-        required: [true, 'Confirm password is required field!']
+        required: [true, 'Confirm password is required field!'],
+        validate : {
+            validator: function(val){
+             return  val === this.password;
+            },
+        message : 'password and confirmpassword does not match'
+        }
+       
     },
     passport:{
         type: String,
-        required: [true, 'passport is required field!']
     },
      roles: {
         User: {
@@ -98,32 +112,92 @@ const employeeSchema = new Schema({
             type: Number,
             default: 1984
         },
-        Admin: Number
+        Admin: Number,
+        select:false
     },
      refreshToken: [String],
-    balance:Number
-}, { id: false },{
-    toJSON: {virtuals: true},
-    toObject: {virtuals: true}
-}
+
+    passwordChangedAt:Date,
+     passwordResetToken:String,
+     passwordResetTokenExpire:Date
+
+}, { id: false }
 );
 
-// employeeSchema.virtual('Name').get(function() {
+
+
+    userSchema.pre('save', async function(next){
+
+    if(!this.isModified('password')) return next()
+            //encrypt password
+    this.password =  await bcrypt.hash(this.password, 12);
+
+    this.confirmpassword = undefined;
+
+    next()
+    })
+
+
+    userSchema.methods.comparePasswordInDb = async function(pswd, psdDb){
+        return await bcrypt.compare(pswd, psdDb);
+    }
+
+
+
+
+ userSchema.methods.createResponseResetPasswordToken = function(){
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+
+   this.passwordResetToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+   this.passwordResetTokenExpire = Date.now() + 10 * 60 * 1000 ;
+
+
+//    console.log(resetToken, this.passwordResetToken)
+
+   return resetToken;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// employeeSchema.virtual('fullName').get(function() {
 //   return this.firstname + ' ' + this.lastname;
 // });
 
 
 
-employeeSchema.pre('save', function(next) {
-    this.balance = 0;
-    next();
-})
-
-employeeSchema.post('save', function(doc, next){
-    const content = `A new user document with name ${doc.firstname} has been created by ${doc.lastname}\n`;
-    console.log(content);
-    next();
-});
 
 
 // employeeSchema.pre(/^find/, function(next){
@@ -137,7 +211,7 @@ employeeSchema.post('save', function(doc, next){
 // });
 
 
-const User = mongoose.model('Userdetail', employeeSchema);
+const User = mongoose.model('User', userSchema);
 
 module.exports = User
 

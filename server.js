@@ -13,6 +13,8 @@ const mongoose = require('mongoose');
 const connectDB = require('./config/dbConn');
 const PORT = process.env.PORT || 3500;
 
+// console.log(process.env)
+// console.log(app.get('env'))
 // Connect to MongoDB
 connectDB();
 
@@ -49,6 +51,7 @@ app.use('/logout', require('./routes/logout'));
 app.use(verifyJWT);
 app.use('/users', require('./routes/api/users'));
 app.use('/userData', require('./routes/api/userData'))
+app.use('/Admin', require('./routes/api/Admin'))
 
 
 
@@ -69,5 +72,7 @@ app.use(errorHandler);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to MongoDB');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    app.listen(PORT, () =>{console.log(`Server running on port ${PORT}`)});
 });
+
+

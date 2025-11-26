@@ -1,87 +1,115 @@
 const UserDetails = require('../model/UserData');
-
+const asyncErrorHandler = require('../utils/asyncErrorHandlers');
+const CustomError = require('../Utils/CustomError');
 
 // Route to add to the account balance
 
-const add = async (req, res) => {
+const add = asyncErrorHandler(async (req, res, next) => {
 
   const { balance } = req.body;
-
-   if (!req._id) return res.sendStatus(401)
  
+  const returnbalance = await UserDetails.findOne({ 'usersdetail' : req._id});
 
-  const userD = await UserDetails.findOne({ 'usersdetail' : req._id});
-
-  try {
-
-  if (!userD) {
-      // Create account if it doesn't exist
-  // const userD = new UserDetails({
-  //       usersdetail: req._id,
-  //       balance: balance,
-  //     });
-  //       await userD.save();
-   throw new Error("no user")
+  if (!returnbalance) {
+    const error = new CustomError('Invalid Account ID', 404);
+        return next(error);
     } else {
-
-      userD.usersdetail.balance += +balance; // Add amount to existing balance
-      await userD.save();
-    }
-
-
-    res.json({ message: 'Balance updated'});
-
-  } catch (err) {
-    res.status(400).json({ message: err.message});
+      returnbalance.balance += +balance; // Add amount to existing balance
+      await returnbalance.save();
   }
-};
+
+    res.status(200).json({
+      status: "success",
+      data:{
+      returnbalance 
+      },
+      });
+
+ 
+}
+) 
 
 
-
-const subtract = async (req, res) => {
+const subtract = async (req, res, next) => {
   const { balance } = req.body;
 
   let userD = await UserDetails.findOne({ 'usersdetail' : req._id});
-  try {
+
+
     if (!userD) {
-      return res.status(404).send('Account not found');
+     const error = new CustomError('Account with that ID is not found!', 404);
+        return next(error);
     }
 
     if (userD.balance < balance) {
-      return res.status(400).send('Insufficient balance');
+       const error = new CustomError('Insufficient balance!', 401);
+        return next(error);
     }
 
     userD.balance -= balance; // Subtract amount from existing balance
     await userD.save();
-    res.json({ message: 'Balance updated', balance: userD.balance });
-  } catch (err) {
-    res.status(500).send('Server error');
-  }
+
+
+
+      res.status(200).json({
+      status: "Balance updated",
+      data:{
+       balance: userD.balance 
+      },
+      });
+
+    // res.json({ message: 'Balance updated', balance: userD.balance });
+
 }
 
 
-const getUser = async (req, res) => {
-    try{
-    const userD = await UserDetails.findOne({ 'usersdetail' : req._id})
+const getUser = asyncErrorHandler(async (req, res, next) => {
+ 
+    const userD = await UserDetails.findOne({ 'usersdetail' :req._id})
     .select('-_id -id')
-    .populate('usersdetail',"firstname emailId lastname country balance").select('-__v')
-    .select('-_id -id').exec();
+    .populate('usersdetail',"firstname email lastname country balance accounttype dateofbirth phonenumber houseaddress").select('-__v ')
+    .select('-_id -_id -__v').exec();
 
+  
   if(!userD){
-     throw new Error("no user")
+    const error = new CustomError('Account with that ID is not found!', 404);
+    return next(error);
   }
-    res.json(userD);
+   
 
-} catch (error) {
-        res.status(400).json(error.message)
+   const plainObject = userD.toObject();
+
+    const details = {
+      _id : plainObject.usersdetail._id,
+      accountNumber: plainObject.accountNumber,
+      balance:plainObject.balance,
+      status:plainObject.status,
+      email:plainObject.usersdetail.email,
+      firstname:plainObject.usersdetail.firstname,
+      lastname: plainObject.usersdetail.lastname,
+      country : plainObject.usersdetail.country,
+      accounttype: plainObject.usersdetail.accounttype,
+      dateofbirth: plainObject.usersdetail.dateofbirth,
+      phonenumber:plainObject.usersdetail.phonenumber,
+      houseaddress:plainObject.usersdetail.houseaddress
     }
+
+    res.status(200).json({ success: true, data: details })
+
 }
+
+) 
+
+
+
+
+
 
 
 module.exports = {
     add,
     getUser,
-    subtract
+    subtract,
 }
 
 

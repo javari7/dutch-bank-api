@@ -4,8 +4,8 @@
   "description": "banking app simulation",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+  "start": "NODE_ENV=development nodemon server.js",
+    "start_prod": "NODE_ENV=production nodemon server.js"
   },
   "author": "javari",
   "license": "ISC",
@@ -16,15 +16,18 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "crypto": "^1.0.1",
     "date-fns": "^2.23.0",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.11",
+    "nodemailer": "^7.0.10",
     "uuid": "^8.3.2",
+    "validator": "^13.15.23",
     "web3": "^4.16.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.22"
   }
 }

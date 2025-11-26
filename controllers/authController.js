@@ -3,23 +3,30 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const handleLogin = async (req, res) => {
+    
  const cookies = req.cookies;
+    const { email, password} = req.body;
+    if (!email || !password) return res.status(400).json({ 'message': 'Email and password are required.' });
 
-    const { emailId, password } = req.body;
-    if (!emailId || !password) return res.status(400).json({ 'message': 'Email and password are required.' });
-
-    const foundUser = await User.findOne({ emailId : emailId }).exec();
-    if (!foundUser) return res.sendStatus(401); //Unauthorized 
     // evaluate password 
-    const match = await bcrypt.compare(password, foundUser.password);
-    if (match) {
+
+  
+const foundUser = await User.findOne({ email }).select("+password");
+
+
+//  const match =  foundUser.comparePasswordInDb(password, foundUser.password);
+
+
+ if(!foundUser || !(await foundUser.comparePasswordInDb(password, foundUser.password))){
+res.status(401).json({ 'message': 'wrong email password.' });
+ }else{
         const roles = Object.values(foundUser.roles).filter(Boolean);
         // create JWTs
         const accessToken = jwt.sign(
             {
                "UserInfo": {
                 "_id":foundUser._id,
-                "emailId": foundUser.emailId,
+                "email": foundUser.email,
                 "roles": roles
             }
         },
@@ -27,7 +34,7 @@ const handleLogin = async (req, res) => {
             { expiresIn: '1h' }
         );
         const  newRefreshToken = jwt.sign(
-            { "emailId": foundUser.emailId,
+            { "email": foundUser.email,
                  "_id":foundUser._id
              },
             process.env.REFRESH_TOKEN_SECRET,
@@ -61,24 +68,29 @@ const handleLogin = async (req, res) => {
         }
 
 
-        // Saving refreshToken with current user
-    
+    foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
+
+     // Saving refreshToken with current user
+      const  user = await foundUser.save({ validateBeforeSave:false});
 
 
-         foundUser.refreshToken = [...newRefreshTokenArray, newRefreshToken];
-
-
-        const result = await foundUser.save();
+        
 
 
         // Creates Secure Cookie with refresh token
         res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true,sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); //secure: true,
 
         // Send authorization roles and access token to user
-        res.json({ roles, accessToken });
+        //  res.status(200).json({
+        //      'status': 'success',
+        //      data:{
+        //        roles,
+        //        user,
+        //         accessToken 
+        //      }
+        //     });
+        res.status(200).json({ roles, accessToken });
 
-    } else {
-        res.sendStatus(401);
     }
 }
 
