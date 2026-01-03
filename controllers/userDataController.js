@@ -21,7 +21,7 @@ const add = asyncErrorHandler(async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data:{
-      returnbalance 
+      returnbalance
       },
       });
 

@@ -15,7 +15,7 @@ router.route('/:id')
 //     .delete(verifyRoles(ROLES_LIST.Admin), employeesController.deleteEmployee);
 
 
-router.route('/forgotPassword').post(usersController.forgotPassword)
-router.route('/resetPassword/:token').patch(usersController.resetPassword )
+// router.route('/forgotPassword').post(usersController.forgotPassword)
+// router.route('/resetPassword/:token').patch(usersController.resetPassword)
 
 module.exports = router;

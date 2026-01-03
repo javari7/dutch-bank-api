@@ -6,7 +6,7 @@ const CustomError = require('../Utils/CustomError');
 
 
 
-const getUser = asyncErrorHandler(async (req, res) => {
+const getUser = asyncErrorHandler(async (req, res,next) => {
 
     const userD = await UserDetails.findOne({ 'usersdetail' : req.params.id}) //await User.findById(req.params.id)
     .select('-_id -id')
@@ -28,7 +28,7 @@ const getUser = asyncErrorHandler(async (req, res) => {
 ) 
 
 
-const getUsers = asyncErrorHandler(async(req, res)=> {
+const getUsers = asyncErrorHandler(async(req, res, next)=> {
     
     const userD = await UserDetails.find()
      .select('-_id -id')
@@ -47,58 +47,119 @@ const getUsers = asyncErrorHandler(async(req, res)=> {
 
 
 
-
-
-
-const upDateUser = async(req,res)=>{
+const add = asyncErrorHandler(async (req, res, next) => {
 
   const { balance } = req.body;
-
  
   const returnbalance = await UserDetails.findOne({ 'usersdetail' : req.params.id});
 
-  try {
   if (!returnbalance) {
-   throw new Error("balance unavailable")
+    const error = new CustomError('Invalid Account ID', 404);
+        return next(error);
     } else {
       returnbalance.balance += +balance; // Add amount to existing balance
       await returnbalance.save();
-    }
+  }
 
     res.status(200).json({
-      status: "success",
+      status: "success balance updated",
       data:{
-      returnbalance 
+      returnbalance
       },
       });
 
-  } catch (err) {
-    res.status(400).json({ message: err.message});
-  }
-
-
+ 
 }
+) 
 
 
 
-const upDateUsers = async(req,res)=>{
-        const {balance} = req.body
-    try {
-    const result = await UserDetails.updateMany(
-      { },
-      { balance}
-    );
+
+
+const subtract = asyncErrorHandler(async (req, res, next) => {
+  const { balance } = req.body;
+
+  let returnbalance = await UserDetails.findOne({ 'usersdetail' : req.params.id});
+
+
+    if (!returnbalance ) {
+     const error = new CustomError('Account with that ID is not found!', 404);
+        return next(error);
+    }
+
+    if (returnbalance.balance < balance) {
+       const error = new CustomError('Insufficient balance!', 401);
+        return next(error);
+    }
+
+    returnbalance.balance -= balance; // Subtract amount from existing balance
+    await returnbalance.save();
+
+
+
+      res.status(200).json({
+      status: "Balance updated",
+      data:{
+        returnbalance
+      },
+      });
+
+})
+
+
+
+
+
+
+// const upDateUser = async(req,res)=>{
+
+//   const { balance } = req.body;
+
+ 
+//   const returnbalance = await UserDetails.findOne({ 'usersdetail' : req.params.id});
+
+//   try {
+//   if (!returnbalance) {
+//    throw new Error("balance unavailable")
+//     } else {
+//       returnbalance.balance += +balance; // Add amount to existing balance
+//       await returnbalance.save();
+//     }
+
+//     res.status(200).json({
+//       status: "success",
+//       data:{
+//       returnbalance 
+//       },
+//       });
+
+//   } catch (err) {
+//     res.status(400).json({ message: err.message});
+//   }
+
+
+// }
+
+
+
+// const upDateUsers = async(req,res)=>{
+//         const {balance} = req.body
+//     try {
+//     const result = await UserDetails.updateMany(
+//       { },
+//       { balance}
+//     );
     
-    res.json({
-      message: 'Users updated successfully',
-      modifiedCount: result.modifiedCount
-    });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
+//     res.json({
+//       message: 'Users updated successfully',
+//       modifiedCount: result.modifiedCount
+//     });
+//   } catch (error) {
+//     res.status(500).json({ error: error.message });
+//   }
 
 
-}
+// }
 
 
 
@@ -107,7 +168,9 @@ const upDateUsers = async(req,res)=>{
 module.exports = {
     getUser,
     getUsers,
-    upDateUsers,
-    upDateUser
+    add,
+    subtract,
+    // upDateUsers,
+    // upDateUser
 
 }

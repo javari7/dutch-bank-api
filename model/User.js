@@ -220,30 +220,30 @@ module.exports = User
 
 // create obj
 // [
-//     {
-//         "firstname":"DevJav",
-//         "lastname":"Jermain",
-//         "middlename":"Osteen",
-//         "address":"Pure street",
-//         "country":"USA",
-//         "state":"Las vegas",
-//         "city":"osbourne",
-//         "zipcode":"1891",
-//         "dateofbirth":"1994",
-//         "houseaddress":"Purestreet",
-//         "phonenumber":"0899033",
-//         "email":"DevJav@gmail.com",
-//         "occupation":"programmer",
-//         "annualincome":"900k",
-//         "ssn":"984653",
-//         "accounttype":"check",
-//         "currency":"usd",
-//         "pin":"76353",
-//         "password":"test123",
-//         "confirmpassword":"test123",
-//         "passport":"javealuuuxxx"
+    // {
+    //     "firstname":"DevJav",
+    //     "lastname":"Jermain",
+    //     "middlename":"Osteen",
+    //     "address":"Pure street",
+    //     "country":"USA",
+    //     "state":"Las vegas",
+    //     "city":"osbourne",
+    //     "zipcode":"1891",
+    //     "dateofbirth":"1994",
+    //     "houseaddress":"Purestreet",
+    //     "phonenumber":"0899033",
+    //     "email":"DevJav@gmail.com",
+    //     "occupation":"programmer",
+    //     "annualincome":"900k",
+    //     "ssn":"984653",
+    //     "accounttype":"check",
+    //     "currency":"usd",
+    //     "pin":"76353",
+    //     "password":"test123",
+    //     "confirmpassword":"test123",
+    //     "passport":"javealuuuxxx"
 
-//     }
+    // }
 // ]
 
 

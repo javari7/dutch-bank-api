@@ -15,11 +15,20 @@ router.route('/:id')
     .get(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.getUser)
 
 
-     router.route('/updateUser/:id')
-    .post(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.upDateUser)
+    router.route('/add/:id')
+    .post(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.add)
 
-    router.route('/updateUsers')
-    .put(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.upDateUsers)
+
+ router.route('/subtract/:id')
+    .post(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.subtract)
+
+
+
+    //  router.route('/updateUser/:id')
+    // .post(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.upDateUser)
+
+    // router.route('/updateUsers')
+    // .put(verifyRoles(ROLES_LIST.Admin,ROLES_LIST.Editor),AdminController.upDateUsers)
 
 
 
