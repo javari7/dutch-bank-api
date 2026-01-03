@@ -10,7 +10,7 @@
   "author": "javari",
   "license": "ISC",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
