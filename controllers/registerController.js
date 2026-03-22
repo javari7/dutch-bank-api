@@ -25,6 +25,11 @@ const handleNewUser = async (req, res) => {
         usersdetail: user._id,
         balance:0.00,
         });
+
+
+
+
+        
     
       
         res.status(201).json({

@@ -6,8 +6,6 @@ const asyncErrorHandler = require('../utils/asyncErrorHandlers');
 const sendEmail = require('../utils/email');
 
 
-
-
 const handleLogin = async (req, res) => {
     
  const cookies = req.cookies;
@@ -81,7 +79,27 @@ res.status(401).json({ 'message': 'wrong email password.' });
 
 
         
+         //send logging alert to mail
 
+    try{
+    await sendEmail({
+        email:user.email,
+        subject:"Login alert !!!!!!!!!!!",
+        message:`${user.email} logged in your account check activity in your settings`
+    });
+
+//    res.status(200).json({
+//     status:"success",
+//     message:'password reset link send to user email'
+//    })
+
+   }catch(err){
+
+    //  return res.status(500).json({message:err.message});
+console.error('EMAIL ERROR:', err);
+// return res.status(500).json({ message: err.message, stack: err.stack });
+
+   }
 
         // Creates Secure Cookie with refresh token
         res.cookie('jwt', newRefreshToken, { httpOnly: true, secure: true,sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 }); //secure: true,
@@ -106,7 +124,7 @@ res.status(401).json({ 'message': 'wrong email password.' });
 //forgot route controller 
 
 const forgotPassword = asyncErrorHandler (async(req,res)=>{
-      const { email} = req.body;
+      const { email } = req.body;
     //1 GET USER BASED ON POSTED EMAIL 
     const user = await User.findOne({ email})
     if(!user){
@@ -143,7 +161,9 @@ const forgotPassword = asyncErrorHandler (async(req,res)=>{
      user.passwordResetTokenExpire=undefined;
      user.save({validateBeforeSave:false});
 
-     return res.status(500).json({message:err.message});
+    //  return res.status(500).json({message:err.message});
+    console.error('EMAIL ERROR:', err);
+return res.status(500).json({ message: err.message, stack: err.stack });
 
    }
     
@@ -163,7 +183,7 @@ const {password,confirmpassword}=req.body;
         return next(error);
     }  
 
-   user.password =password;
+  user.password =password;
   user.confirmpassword = confirmpassword;
   user.passwordResetToken =undefined;
   user.passwordResetTokenExpire =undefined;
